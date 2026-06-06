@@ -27,7 +27,8 @@
         "drupal/config_normalizer": "^1.0@beta",
         "drupal/config_provider": "^3.0@alpha",
         "drupal/config_update": "^2.0@alpha",
-        "drupal/config_sync": "^3.0@alpha"
+        "drupal/config_sync": "^3.0@alpha",
+        "drupal/redirect": "^1.13"
     },
     "require-dev": {
         "drupal/core-dev": "^11"
