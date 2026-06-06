@@ -28,7 +28,8 @@
         "drupal/config_provider": "^3.0@alpha",
         "drupal/config_update": "^2.0@alpha",
         "drupal/config_sync": "^3.0@alpha",
-        "drupal/redirect": "^1.13"
+        "drupal/redirect": "^1.13",
+        "drupal/metatag": "^2.2"
     },
     "require-dev": {
         "drupal/core-dev": "^11"
