@@ -1,0 +1,9 @@
+name: Config Provider - Foo consumer
+type: module
+description: Test module with a config/foo folder.
+package: Testing
+
+# Information added by Drupal.org packaging script on 2025-08-12
+version: '3.0.0-alpha3'
+project: 'config_provider'
+datestamp: 1755033599
