@@ -1,0 +1,61 @@
+name: Deploy to Pantheon
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup PHP 8.3
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, xml, curl, zip, gd, mysql
+
+      - name: Install Composer Dependencies
+        run: composer install --no-dev --optimize-autoloader
+
+      - name: Setup SSH Agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.PANTHEON_SSH_KEY }}
+
+      - name: Add Pantheon to Known Hosts
+        run: |
+          ssh-keyscan -p 2222 codeserver.dev.a5bf2dcb-b0f6-4117-bd30-433051128dde.drush.in >> ~/.ssh/known_hosts
+
+      - name: Install Terminus
+        run: |
+          curl -L https://github.com/pantheon-systems/terminus/releases/download/3.4.0/terminus.phar --output terminus
+          chmod +x terminus
+          sudo mv terminus /usr/local/bin/terminus
+
+      - name: Authenticate Terminus
+        run: |
+          terminus auth:login --machine-token=${{ secrets.PANTHEON_MACHINE_TOKEN }}
+
+      - name: Enable Git Mode on Pantheon
+        run: |
+          terminus connection:set ${{ secrets.PANTHEON_SITE_NAME }}.dev git
+
+      - name: Push Code to Pantheon
+        run: |
+          git remote add pantheon ssh://codeserver.dev.a5bf2dcb-b0f6-4117-bd30-433051128dde@codeserver.dev.a5bf2dcb-b0f6-4117-bd30-433051128dde.drush.in:2222/~/repository.git
+          git push pantheon master --force
+
+      - name: Run Database Updates
+        run: |
+          terminus drush ${{ secrets.PANTHEON_SITE_NAME }}.dev -- updatedb -y
+
+      - name: Clear Cache
+        run: |
+          terminus drush ${{ secrets.PANTHEON_SITE_NAME }}.dev -- cr
