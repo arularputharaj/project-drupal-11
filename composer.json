@@ -22,7 +22,12 @@
         "cweagans/composer-patches": "^1.7",
         "drush/drush": "^13",
         "drupal/admin_toolbar": "^3.6",
-        "drupal/pathauto": "^1.15"
+        "drupal/pathauto": "^1.15",
+        "drupal/config_merge": "^2.0@alpha",
+        "drupal/config_normalizer": "^1.0@beta",
+        "drupal/config_provider": "^3.0@alpha",
+        "drupal/config_update": "^2.0@alpha",
+        "drupal/config_sync": "^3.0@alpha"
     },
     "require-dev": {
         "drupal/core-dev": "^11"
