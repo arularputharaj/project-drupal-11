@@ -1,0 +1,18 @@
+<?php
+use Drupal\node\Entity\Node;
+/**
+* Custom ultimate cron callback function.
+*/
+function custom_cron_example_publish_article_job() {
+ $message = "Voila ! Ultimate cron works.";
+ \Drupal::logger("custom_cron_example")->notice($message);
+ // Query to fetch all article unpublished nodes.
+ $query = \Drupal::entityQuery('node');
+ $query->condition('status', 0);
+ $query->condition('type', 'article');
+ $entity_ids = $query->accessCheck(FALSE)->execute();
+ foreach ($entity_ids as $entity_id) {
+   $node = Node::load($entity_id);
+   $node->setPublished(TRUE)->save();
+ }
+}

@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies:
+ module:
+   - custom_cron_example
+title: 'Custom job for publishing articless'
+id: publish_article_job
+module: custom_cron_example
+callback: custom_cron_example_publish_article_job
+scheduler:
+ id: simple
+ configuration:
+   rules:
+     - '* * * * *'
