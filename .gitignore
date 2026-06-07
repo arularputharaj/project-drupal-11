@@ -94,3 +94,4 @@
 
 # Ignore .env files as they are personal
 #/.env
+web/modules/contrib/ultimate_cron/
