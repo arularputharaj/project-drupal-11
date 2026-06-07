@@ -1,0 +1,8 @@
+name: 'Custom Cron Example'
+type: module
+description: 'Demonstrates Ultimate Cron custom job.'
+core_version_requirement: ^10 || ^11
+package: Custom
+dependencies:
+  - drupal:node
+  - ultimate_cron:ultimate_cron
