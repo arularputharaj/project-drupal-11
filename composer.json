@@ -29,7 +29,8 @@
         "drupal/config_update": "^2.0@alpha",
         "drupal/config_sync": "^3.0@alpha",
         "drupal/redirect": "^1.13",
-        "drupal/metatag": "^2.2"
+        "drupal/metatag": "^2.2",
+        "drupal/ultimate_cron": "^2.0@beta"
     },
     "require-dev": {
         "drupal/core-dev": "^11"
